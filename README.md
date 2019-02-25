@@ -22,7 +22,11 @@
 
 ## API Documentation
 //Post request  api/v1/todos/save
+
 //Get request (/todos) api/v1/todos/
+
 //Get request (/todos/:priority) api/v1/todos/:priority
+
 //Get request (/todos/:category) api/v1/todos/:category
+
 //Get request (/todos/is_completed) api/v1/todos/is_completed --> gets tasks with is_completed: true
