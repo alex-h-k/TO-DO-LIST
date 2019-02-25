@@ -11,7 +11,7 @@
 1. As a user I want to create a to-do list and set up a due-time and also can check all to-do list I created, show selected ones by category
 2. As a user I want to mark a to-do list to completed when I finish the task
 3. As a user I want to update a to-do list
-3, As a user I want to delete a to-do list
+4. As a user I want to delete a to-do list
 
 ## Todos
 - [x] Write the ReadMe
