@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getTodos } = require("../db/todo");
+const { getTodos, createTodos } = require("../db/todo");
 
 //Get /api/v1/todos
 router.get("/", (req, res) => {
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 //Post /api/v1/todos
 router.post("/save", (req, res) => {
-  res.send("ok");
+  createTodos().then(todos => res.json(todos));
 });
 
 //Get /api/v1/todos/priority
