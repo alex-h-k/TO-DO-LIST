@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 
 //Post /api/v1/todos/save
 router.post("/save", (req, res) => {
-  createTodos().then(todos => res.json(todos));
+  console.log(req.body);
+  createTodos(req.body).then(todos => res.json(todos));
 });
 
 // Get /api/v1/todos/:priority

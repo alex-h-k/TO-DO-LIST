@@ -5,11 +5,12 @@ function getTodos(testDb) {
   return db("todos").select();
 }
 
-function createTodos(testDb) {
+function createTodos(newTodo, testDb) {
   const db = testDb || connection;
   return db("todos")
-    .insert("todos")
-    .then(cats => {
+    .insert(newTodo)
+    .then(todos => {
+      console.log("newTodo-->", newTodo);
       return db("todos").select();
     });
 }
