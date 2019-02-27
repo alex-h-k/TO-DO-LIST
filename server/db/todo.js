@@ -10,7 +10,6 @@ function createTodos(newTodo, testDb) {
   return db("todos")
     .insert(newTodo)
     .then(todos => {
-      console.log("newTodo-->", newTodo);
       return db("todos").select();
     });
 }

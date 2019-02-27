@@ -14,7 +14,6 @@ router.get("/", (req, res) => {
 
 //Post /api/v1/todos/save
 router.post("/save", (req, res) => {
-  console.log(req.body);
   createTodos(req.body).then(todos => res.json(todos));
 });
 

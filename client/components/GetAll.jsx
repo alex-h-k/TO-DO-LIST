@@ -21,7 +21,7 @@ class GetAll extends React.Component {
         <h1>TODO--LIST</h1>
         {todos.map(todo => (
           <li key={todo.id}>
-            {todo.category}-{todo.task}-{todo.priority}
+            {todo.category}--{todo.task}--{todo.priority}--{todo.due_at}
           </li>
         ))}
         <button onClick={this.getTodos}>Show All</button>

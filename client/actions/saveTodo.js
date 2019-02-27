@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function saveTodoAction() {
+export function saveTodoAction(task, priority, category, is_completed, due_at) {
   const data = {
     task,
     priority,
