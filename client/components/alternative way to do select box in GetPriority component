@@ -1,0 +1,7 @@
+   <select name="todos" onChange={this.getPriority}>
+      {todos.map(todo => todo.priority).map(todo => (
+       <option key={todo.id} value={todo.priority}>
+        {todo.priority}
+       </option>
+            ))}
+    </select>

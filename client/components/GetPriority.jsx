@@ -26,9 +26,9 @@ class GetPriority extends React.Component {
         <p>
           Show tasks by priority:
           <select name="todos" onChange={this.getPriority}>
-            {todos.map(todo => (
-              <option key={todo.id} value={todo.priority}>
-                {todo.priority}
+            {[1, 2, 3, 4, 5].map(item => (
+              <option key={item} value={item}>
+                {item}
               </option>
             ))}
           </select>
