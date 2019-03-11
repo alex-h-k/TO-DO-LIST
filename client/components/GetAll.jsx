@@ -22,15 +22,27 @@ class GetAll extends React.Component {
         <section className="hero is-medium is-dark is-bold">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title todo-title">TODO--LIST</h1>
+              <h1 className="title todo-title is-1">TODO LIST</h1>
             </div>
           </div>
         </section>
 
         {todos.map(todo => (
-          <li key={todo.id}>
-            {todo.category}--{todo.task}--{todo.priority}--{todo.due_at}
-          </li>
+          <section className="hero is-light">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title">{todo.task}</h1>
+                <h2 className="subtitle">
+                  Category:{todo.category}, Priority:{todo.priority}{" "}
+                </h2>
+                <a class="button is-info">Edit</a>
+                <a class="button is-danger">Danger</a>
+              </div>
+            </div>
+          </section>
+          // <li key={todo.id}>
+          //   {todo.category}--{todo.task}--{todo.priority}--{todo.due_at}
+          // </li>
         ))}
         <button onClick={this.getTodos}>Show All</button>
       </div>
