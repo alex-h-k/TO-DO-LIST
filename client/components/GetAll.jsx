@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getTodosAction } from "../actions/getTodos";
+
 class GetAll extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,14 @@ class GetAll extends React.Component {
     let { todos } = this.props;
     return (
       <div>
-        <h1>TODO--LIST</h1>
+        <section className="hero is-medium is-dark is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title todo-title">TODO--LIST</h1>
+            </div>
+          </div>
+        </section>
+
         {todos.map(todo => (
           <li key={todo.id}>
             {todo.category}--{todo.task}--{todo.priority}--{todo.due_at}
