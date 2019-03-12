@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getTodos, createTodos, getTodosByPriority } = require("../db/todo");
+const {
+  getTodos,
+  createTodos,
+  getTodosByPriority,
+  delTodosById
+} = require("../db/todo");
 
 //Get /api/v1/todos
 router.get("/", (req, res) => {
@@ -24,4 +29,10 @@ router.get("/:priority", (req, res) => {
   });
 });
 
+// Del /api/v1/todos/del/:id
+router.delete("/del/:id", (req, res) => {
+  delTodosById(req.params.id).then(todos => {
+    res.json(todos);
+  });
+});
 module.exports = router;

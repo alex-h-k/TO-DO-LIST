@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getTodosAction } from "../actions/getTodos";
+import { delTodoAction } from "../actions/delTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
@@ -15,6 +16,11 @@ class GetAll extends React.Component {
   getTodos() {
     return this.props.getTodos();
   }
+
+  delTodo = id => {
+    return this.props.delTodo(id);
+  };
+
   render() {
     let { todos } = this.props;
     return (
@@ -33,10 +39,19 @@ class GetAll extends React.Component {
               <div className="container">
                 <h1 className="title">{todo.task}</h1>
                 <h2 className="subtitle">
-                  Category:{todo.category}, Priority:{todo.priority}{" "}
+                  Category:{todo.category}, Priority:{todo.priority}
                 </h2>
-                <a class="button is-info">Edit</a>
-                <a class="button is-danger">Danger</a>
+                <a className="button is-info">Edit</a>
+                <a
+                  className="button is-danger"
+                  onClick={e => {
+                    window.confirm(
+                      "Are you sure you wish to delete this todo?"
+                    ) && this.delTodo(todo.id);
+                  }}
+                >
+                  Delete
+                </a>
               </div>
             </div>
           </section>
@@ -55,7 +70,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { getTodos: () => dispatch(getTodosAction()) };
+  return {
+    getTodos: () => dispatch(getTodosAction()),
+    delTodo: id => dispatch(delTodoAction(id))
+  };
 }
 export default connect(
   mapStateToProps,

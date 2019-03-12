@@ -21,8 +21,19 @@ function getTodosByPriority(priority, testDb) {
     .select();
 }
 
+function delTodosById(id, testDb) {
+  const db = testDb || connection;
+  return db("todos")
+    .where("id", id)
+    .del()
+    .then(data => {
+      return getTodos();
+    });
+}
+
 module.exports = {
   getTodos,
   createTodos,
-  getTodosByPriority
+  getTodosByPriority,
+  delTodosById
 };
