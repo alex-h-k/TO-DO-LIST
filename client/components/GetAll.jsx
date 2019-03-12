@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 
 import { getTodosAction } from "../actions/getTodos";
 import { delTodoAction } from "../actions/delTodo";
+import SaveTodo from "./SaveTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false
+    };
     this.getTodos = this.getTodos.bind(this);
   }
   componentDidMount() {
@@ -21,6 +25,18 @@ class GetAll extends React.Component {
     return this.props.delTodo(id);
   };
 
+  handleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
+
+  handleCancleModal = () => {
+    this.setState({
+      showModal: false
+    });
+  };
+
   render() {
     let { todos } = this.props;
     return (
@@ -30,10 +46,38 @@ class GetAll extends React.Component {
             <div className="container">
               <h1 className="title todo-title is-1">
                 TODO LIST
-                <a className="button is-hovered normal is-rounded add-one">
+                <a
+                  className="button is-hovered normal is-rounded "
+                  id="add-one"
+                  onClick={this.handleModal}
+                >
                   <i class="fas fa-plus " />
                   Add One
                 </a>
+                {this.state.showModal && (
+                  <div class="modal is-active">
+                    <div class="modal-background" />
+                    <div class="modal-card">
+                      <header class="modal-card-head">
+                        <p class="modal-card-title">Modal title</p>
+                        <button
+                          class="delete"
+                          onClick={this.handleCancleModal}
+                          aria-label="close"
+                        />
+                      </header>
+                      <section class="modal-card-body">
+                        <SaveTodo />
+                      </section>
+                      <footer class="modal-card-foot">
+                        <button class="button is-success">Save changes</button>
+                        <button onClick={this.handleCancleModal} class="button">
+                          Cancel
+                        </button>
+                      </footer>
+                    </div>
+                  </div>
+                )}
               </h1>
             </div>
           </div>
