@@ -28,7 +28,13 @@ class GetAll extends React.Component {
         <section className="hero is-medium is-dark is-bold">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title todo-title is-1">TODO LIST</h1>
+              <h1 className="title todo-title is-1">
+                TODO LIST
+                <a className="button is-hovered normal is-rounded add-one">
+                  <i class="fas fa-plus " />
+                  Add One
+                </a>
+              </h1>
             </div>
           </div>
         </section>
@@ -36,7 +42,7 @@ class GetAll extends React.Component {
         {todos.map(todo => (
           <section className="hero is-light">
             <div className="hero-body">
-              <div className="columns">
+              <div className="columns tasks">
                 <h1 className="title column is-one-quarter">{todo.task}</h1>
                 <h2 className="column is-one-quarter tag is-warning is-medium">
                   Category:{todo.category}
