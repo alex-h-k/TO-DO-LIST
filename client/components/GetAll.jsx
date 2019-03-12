@@ -36,22 +36,29 @@ class GetAll extends React.Component {
         {todos.map(todo => (
           <section className="hero is-light">
             <div className="hero-body">
-              <div className="container">
-                <h1 className="title">{todo.task}</h1>
-                <h2 className="subtitle">
-                  Category:{todo.category}, Priority:{todo.priority}
+              <div className="columns">
+                <h1 className="title column is-one-quarter">{todo.task}</h1>
+                <h2 className="column is-one-quarter tag is-warning is-medium">
+                  Category:{todo.category}
                 </h2>
-                <a className="button is-info">Edit</a>
-                <a
-                  className="button is-danger"
-                  onClick={e => {
-                    window.confirm(
-                      "Are you sure you wish to delete this todo?"
-                    ) && this.delTodo(todo.id);
-                  }}
-                >
-                  Delete
-                </a>
+                <h2 className="column is-one-quarter tag is-warning is-medium">
+                  Priority:{todo.priority}
+                </h2>
+                <div className="column is-one-quarter">
+                  <a className="button is-info is-medium is-rounded todo-button">
+                    <i className="fas fa-edit" />
+                  </a>
+                  <a
+                    className="button is-danger is-medium is-rounded todo-button"
+                    onClick={e => {
+                      window.confirm(
+                        "Are you sure you wish to delete this todo?"
+                      ) && this.delTodo(todo.id);
+                    }}
+                  >
+                    <i className="fas fa-trash-alt" />
+                  </a>
+                </div>
               </div>
             </div>
           </section>
