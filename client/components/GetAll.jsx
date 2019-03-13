@@ -3,12 +3,18 @@ import { connect } from "react-redux";
 
 import { getTodosAction } from "../actions/getTodos";
 import { delTodoAction } from "../actions/delTodo";
-import SaveTodo from "./SaveTodo";
+import { saveTodoAction } from "../actions/saveTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      task: "",
+      priority: null,
+      category: "",
+      is_completed: false,
+      due_at: null,
+      err: false,
       showModal: false
     };
     this.getTodos = this.getTodos.bind(this);
@@ -35,6 +41,44 @@ class GetAll extends React.Component {
     this.setState({
       showModal: false
     });
+  };
+
+  save = () => {
+    const { task, priority, category, is_completed, due_at } = this.state;
+    if (this.state.task === "") {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.priority === null) {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.category === "") {
+      this.setState({
+        error: true
+      });
+    } else if (this.state.due_at === null) {
+      this.setState({
+        error: true
+      });
+    } else {
+      this.setState({ error: false });
+      this.props.saveTodo(task, priority, category, is_completed, due_at);
+      this.setState({
+        task: "",
+        priority: null,
+        category: "",
+        is_completed: false,
+        due_at: null,
+        showModal: false
+      });
+    }
+  };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    console.log("input", this.state);
   };
 
   render() {
@@ -67,10 +111,47 @@ class GetAll extends React.Component {
                         />
                       </header>
                       <section class="modal-card-body">
-                        <SaveTodo />
+                        <div>
+                          <h2>Save TODO</h2>
+                          {this.state.error && (
+                            <p style={{ color: "red" }}>
+                              please fill out all details
+                            </p>
+                          )}
+                          <input
+                            name="task"
+                            onChange={this.handleChange}
+                            type="text"
+                            placeholder="task"
+                            value={this.state.task}
+                          />
+                          <input
+                            name="priority"
+                            onChange={this.handleChange}
+                            type="number"
+                            min="1"
+                            max="5"
+                            value={this.state.priority}
+                          />
+                          <input
+                            name="category"
+                            onChange={this.handleChange}
+                            type="text"
+                            placeholder="category"
+                            value={this.state.category}
+                          />
+                          <input
+                            name="due_at"
+                            onChange={this.handleChange}
+                            type="datetime-local"
+                            value={this.state.due_at}
+                          />
+                        </div>
                       </section>
                       <footer class="modal-card-foot">
-                        <button class="button is-success">Save changes</button>
+                        <button onClick={this.save} class="button is-success">
+                          Save changes
+                        </button>
                         <button onClick={this.handleCancleModal} class="button">
                           Cancel
                         </button>
@@ -129,7 +210,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getTodos: () => dispatch(getTodosAction()),
-    delTodo: id => dispatch(delTodoAction(id))
+    delTodo: id => dispatch(delTodoAction(id)),
+    saveTodo: (task, priority, category, is_completed, due_at) =>
+      dispatch(saveTodoAction(task, priority, category, is_completed, due_at))
   };
 }
 export default connect(
