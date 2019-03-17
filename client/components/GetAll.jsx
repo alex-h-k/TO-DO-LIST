@@ -37,12 +37,14 @@ class GetAll extends React.Component {
     });
   };
 
-  handleCancleModal = () => {
+  handleCancelModal = () => {
     this.setState({
       showModal: false
     });
   };
-
+  getDate = time => {
+    return new Date(time);
+  };
   save = () => {
     const { task, priority, category, is_completed, due_at } = this.state;
     if (this.state.task === "") {
@@ -106,7 +108,7 @@ class GetAll extends React.Component {
                         <p class="modal-card-title">Modal title</p>
                         <button
                           class="delete"
-                          onClick={this.handleCancleModal}
+                          onClick={this.handleCancelModal}
                           aria-label="close"
                         />
                       </header>
@@ -118,41 +120,63 @@ class GetAll extends React.Component {
                               please fill out all details
                             </p>
                           )}
-                          <input
-                            name="task"
-                            onChange={this.handleChange}
-                            type="text"
-                            placeholder="task"
-                            value={this.state.task}
-                          />
-                          <input
-                            name="priority"
-                            onChange={this.handleChange}
-                            type="number"
-                            min="1"
-                            max="5"
-                            value={this.state.priority}
-                          />
-                          <input
-                            name="category"
-                            onChange={this.handleChange}
-                            type="text"
-                            placeholder="category"
-                            value={this.state.category}
-                          />
-                          <input
-                            name="due_at"
-                            onChange={this.handleChange}
-                            type="datetime-local"
-                            value={this.state.due_at}
-                          />
+                          <form>
+                            <div className="field">
+                              <label className="label">Todo Name</label>
+                              <div className="control">
+                                <input
+                                  name="task"
+                                  onChange={this.handleChange}
+                                  type="text"
+                                  placeholder="task"
+                                  value={this.state.task}
+                                />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Priority</label>
+                              <div className="control">
+                                <input
+                                  name="priority"
+                                  onChange={this.handleChange}
+                                  type="number"
+                                  min="1"
+                                  max="5"
+                                  value={this.state.priority}
+                                />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Category</label>
+                              <div className="control">
+                                <input
+                                  name="category"
+                                  onChange={this.handleChange}
+                                  type="text"
+                                  placeholder="category"
+                                  value={this.state.category}
+                                />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label">Date&Time</label>
+                              <div className="control">
+                                <input
+                                  name="due_at"
+                                  onChange={this.handleChange}
+                                  type="datetime-local"
+                                  value={this.state.due_at}
+                                />
+                              </div>
+                            </div>
+                          </form>
                         </div>
                       </section>
                       <footer class="modal-card-foot">
                         <button onClick={this.save} class="button is-success">
                           Save changes
                         </button>
-                        <button onClick={this.handleCancleModal} class="button">
+                        <button onClick={this.handleCancelModal} class="button">
                           Cancel
                         </button>
                       </footer>
@@ -168,14 +192,15 @@ class GetAll extends React.Component {
           <section className="hero is-light">
             <div className="hero-body">
               <div className="columns tasks">
-                <h1 className="title column is-one-quarter">{todo.task}</h1>
-                <h2 className="column is-one-quarter tag is-warning is-medium">
+                <h1 className="title column is-one-fifth">{todo.task}</h1>
+                <h2 className="column is-one-fifth tag is-warning is-medium">
                   Category:{todo.category}
                 </h2>
-                <h2 className="column is-one-quarter tag is-warning is-medium">
+                <h2 className="column is-one-fifth tag is-warning is-medium">
                   Priority:{todo.priority}
                 </h2>
-                <div className="column is-one-quarter">
+                <h2>Finish Time: {this.getDate(todo.due_at).toString()}</h2>
+                <div className="column is-one-fifth">
                   <a className="button is-info is-medium is-rounded todo-button">
                     <i className="fas fa-edit" />
                   </a>
