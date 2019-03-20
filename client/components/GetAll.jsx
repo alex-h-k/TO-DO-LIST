@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getTodosAction } from "../actions/getTodos";
 import { delTodoAction } from "../actions/delTodo";
 import { saveTodoAction } from "../actions/saveTodo";
+import SaveTodo from "./SaveTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class GetAll extends React.Component {
       is_completed: false,
       due_at: null,
       err: false,
-      showModal: false
+      showModal: false,
+      showEditModal: false
     };
     this.getTodos = this.getTodos.bind(this);
   }
@@ -34,6 +36,18 @@ class GetAll extends React.Component {
   handleModal = () => {
     this.setState({
       showModal: !this.state.showModal
+    });
+  };
+
+  handleEditModal = () => {
+    this.setState({
+      showEditModal: !this.state.showEditModal
+    });
+  };
+
+  handleCanceEditModal = () => {
+    this.setState({
+      showEditModal: false
     });
   };
 
@@ -105,7 +119,7 @@ class GetAll extends React.Component {
                     <div class="modal-background" />
                     <div class="modal-card">
                       <header class="modal-card-head">
-                        <p class="modal-card-title">Modal title</p>
+                        <p class="modal-card-title">Add Todo</p>
                         <button
                           class="delete"
                           onClick={this.handleCancelModal}
@@ -201,9 +215,13 @@ class GetAll extends React.Component {
                 </h2>
                 <h2>Finish Time: {this.getDate(todo.due_at).toString()}</h2>
                 <div className="column is-one-fifth">
-                  <a className="button is-info is-medium is-rounded todo-button">
+                  <a
+                    className="button is-info is-medium is-rounded todo-button"
+                    onClick={this.handleEditModal}
+                  >
                     <i className="fas fa-edit" />
                   </a>
+                  {this.state.showEditModal && <SaveTodo {...todo} />}
                   <a
                     className="button is-danger is-medium is-rounded todo-button"
                     onClick={e => {
