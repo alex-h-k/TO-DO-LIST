@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getTodosAction } from "../actions/getTodos";
 import { delTodoAction } from "../actions/delTodo";
 import { saveTodoAction } from "../actions/saveTodo";
-import SaveTodo from "./SaveTodo";
+import EditTodo from "./EditTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class GetAll extends React.Component {
       });
     } else {
       this.setState({ error: false });
-      this.props.saveTodo(task, priority, category, is_completed, due_at);
+      this.props.saveTodoAction(task, priority, category, is_completed, due_at);
       this.setState({
         task: "",
         priority: null,
@@ -221,7 +221,7 @@ class GetAll extends React.Component {
                   >
                     <i className="fas fa-edit" />
                   </a>
-                  {this.state.showEditModal && <SaveTodo {...todo} />}
+                  {this.state.showEditModal && <EditTodo {...todo} />}
                   <a
                     className="button is-danger is-medium is-rounded todo-button"
                     onClick={e => {
