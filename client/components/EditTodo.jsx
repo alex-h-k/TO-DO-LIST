@@ -35,13 +35,20 @@ class EditTodo extends Component {
       });
     } else {
       this.setState({ error: false });
-      this.props.editTodo(id, task, priority, category, is_completed, due_at);
+      this.props.editTodo(
+        this.props.id,
+        task,
+        priority,
+        category,
+        is_completed,
+        due_at
+      );
     }
   };
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.defaultValue
+      [e.target.name]: e.target.value
     });
   };
 
