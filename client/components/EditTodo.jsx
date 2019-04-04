@@ -43,6 +43,7 @@ class EditTodo extends Component {
         is_completed,
         due_at
       );
+      this.props.handleCanceEditModal();
     }
   };
 

@@ -47,7 +47,7 @@ class SaveTodo extends Component {
   };
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.defaultValue
+      [e.target.name]: e.target.value
     });
   };
 

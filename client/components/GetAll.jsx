@@ -221,7 +221,12 @@ class GetAll extends React.Component {
                   >
                     <i className="fas fa-edit" />
                   </a>
-                  {this.state.showEditModal && <EditTodo {...todo} />}
+                  {this.state.showEditModal && (
+                    <EditTodo
+                      {...todo}
+                      handleCanceEditModal={this.handleCanceEditModal}
+                    />
+                  )}
                   <a
                     className="button is-danger is-medium is-rounded todo-button"
                     onClick={e => {
