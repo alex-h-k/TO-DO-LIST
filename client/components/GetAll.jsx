@@ -79,7 +79,7 @@ class GetAll extends React.Component {
       });
     } else {
       this.setState({ error: false });
-      this.props.saveTodoAction(task, priority, category, is_completed, due_at);
+      this.props.saveTodo(task, priority, category, is_completed, due_at);
       this.setState({
         task: "",
         priority: null,

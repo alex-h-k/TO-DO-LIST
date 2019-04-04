@@ -63,7 +63,6 @@ class SaveTodo extends Component {
           onChange={this.handleChange}
           type="text"
           placeholder="task"
-          defaultValue={this.props.task}
         />
         <input
           name="priority"
@@ -71,20 +70,17 @@ class SaveTodo extends Component {
           type="number"
           min="1"
           max="5"
-          defaultValue={this.props.priority}
         />
         <input
           name="category"
           onChange={this.handleChange}
           type="text"
           placeholder="category"
-          defaultValue={this.props.category}
         />
         <input
           name="due_at"
           onChange={this.handleChange}
           type="datetime-local"
-          defaultValue={this.props.due_at}
         />
 
         <button onClick={this.save}>Save</button>
