@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getTodosAction } from "../actions/getTodos";
 import { delTodoAction } from "../actions/delTodo";
 import { saveTodoAction } from "../actions/saveTodo";
-import SaveTodo from "./SaveTodo";
+import EditTodo from "./EditTodo";
 
 class GetAll extends React.Component {
   constructor(props) {
@@ -221,7 +221,12 @@ class GetAll extends React.Component {
                   >
                     <i className="fas fa-edit" />
                   </a>
-                  {this.state.showEditModal && <SaveTodo {...todo} />}
+                  {this.state.showEditModal && (
+                    <EditTodo
+                      {...todo}
+                      handleCanceEditModal={this.handleCanceEditModal}
+                    />
+                  )}
                   <a
                     className="button is-danger is-medium is-rounded todo-button"
                     onClick={e => {

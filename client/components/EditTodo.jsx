@@ -1,50 +1,52 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { saveTodoAction } from "../actions/saveTodo";
+import { editTodoAction } from "../actions/editTodo";
 
-class SaveTodo extends Component {
+class EditTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: "",
-      priority: null,
-      category: "",
-      is_completed: false,
-      due_at: null,
-      err: false
+      task: this.props.task,
+      priority: this.props.priority,
+      category: this.props.category,
+      is_completed: this.props.is_completed,
+      due_at: this.props.due_at,
+      err: this.props.err
     };
   }
 
-  save = () => {
+  edit = () => {
     const { task, priority, category, is_completed, due_at } = this.state;
-    if (this.state.task === "") {
+    if (task === "") {
       this.setState({
         error: true
       });
-    } else if (this.state.priority === null) {
+    } else if (priority === null) {
       this.setState({
         error: true
       });
-    } else if (this.state.category === "") {
+    } else if (category === "") {
       this.setState({
         error: true
       });
-    } else if (this.state.due_at === null) {
+    } else if (due_at === null) {
       this.setState({
         error: true
       });
     } else {
       this.setState({ error: false });
-      this.props.saveTodo(task, priority, category, is_completed, due_at);
-      this.setState({
-        task: "",
-        priority: null,
-        category: "",
-        is_completed: false,
-        due_at: null
-      });
+      this.props.editTodo(
+        this.props.id,
+        task,
+        priority,
+        category,
+        is_completed,
+        due_at
+      );
+      this.props.handleCanceEditModal();
     }
   };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -54,7 +56,7 @@ class SaveTodo extends Component {
   render() {
     return (
       <div>
-        <h2>Save TODO</h2>
+        <h2>Edit TODO</h2>
         {this.state.error && (
           <p style={{ color: "red" }}>please fill out all details</p>
         )}
@@ -63,6 +65,7 @@ class SaveTodo extends Component {
           onChange={this.handleChange}
           type="text"
           placeholder="task"
+          defaultValue={this.props.task}
         />
         <input
           name="priority"
@@ -70,20 +73,23 @@ class SaveTodo extends Component {
           type="number"
           min="1"
           max="5"
+          defaultValue={this.props.priority}
         />
         <input
           name="category"
           onChange={this.handleChange}
           type="text"
           placeholder="category"
+          defaultValue={this.props.category}
         />
         <input
           name="due_at"
           onChange={this.handleChange}
           type="datetime-local"
+          defaultValue={this.props.due_at}
         />
 
-        <button onClick={this.save}>Save</button>
+        <button onClick={this.edit}>Edit</button>
       </div>
     );
   }
@@ -97,12 +103,14 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveTodo: (task, priority, category, is_completed, due_at) =>
-      dispatch(saveTodoAction(task, priority, category, is_completed, due_at))
+    editTodo: (id, task, priority, category, is_completed, due_at) =>
+      dispatch(
+        editTodoAction(id, task, priority, category, is_completed, due_at)
+      )
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SaveTodo);
+)(EditTodo);
